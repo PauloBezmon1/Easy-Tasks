@@ -1,0 +1,10 @@
+.aside-item:hover {
+    background-color: #4338ca;
+    border-radius: 5px;
+    color: white;
+}
+
+.aside-item {
+    width: 100%;
+    transition: .3s;
+}
