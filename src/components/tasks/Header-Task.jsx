@@ -1,24 +1,27 @@
 import { useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
+import './Header-Task.css'
 
 function Header() {
   const [openTaskForm, setOpenTaskForm] = useState(false);
 
-  const [titulo, setTitulo] = useState("Título");
+  const [titulo, setTitulo] = useState("Title");
   const handleChange = (event) => {
     setTitulo(event.target.value);
   };
   
-  const [description, setDescription] = useState("Descrição da tarefa");
+  const [description, setDescription] = useState("Task description");
   const handleChange2 = (event2) => {
     setDescription(event2.target.value);
   };
 
+  const [status, setStatus] = useState("");
+  
   return (
     <>
       <header className="sticky top-0 z-50 flex flex-wrap w-full text-sm md:justify-start md:flex-nowrap ">
-        <nav className="mt-6 relative max-w-[85rem] w-full bg-white border border-gray-200 rounded-md mx-2 py-1.5 md:py-3 px-1 md:px-4 md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto h-full dark:bg-slate-900">
+        <nav className="mt-6 relative max-w-[85rem] w-full bg-white border border-gray-200 rounded-md mx-2 py-1.5 px-1  md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto h-full dark:bg-slate-900">
           <Fade cascade damping={1e-1} direction="down" triggerOnce={true}>
             <div className="flex items-center justify-between">
               <svg
@@ -113,7 +116,7 @@ function Header() {
                   className="px-5 py-1 bg-indigo-700 flex item-center justify-center rounded-xl text-white active-button "
                   onClick={() => setOpenTaskForm(true)}
                 >
-                  Adicione uma tarefa +
+                  Add task +
                 </button>
                 <Link to="/login">
                   <a
@@ -131,15 +134,22 @@ function Header() {
 
       {openTaskForm && (
         <>
-          <div className="fixed top-0 left-0 w-screen h-screen bg-black opacity-75">
-            dsadsadassa
-          </div>
+          <div className="fixed top-0 left-0 w-screen h-screen bg-black opacity-75"></div>{/* Fundo escuro */}
           <div className="fixed w-4/5 lg:w-2/4 h-3.5/5 top-96 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded shadow-lg border-4 border-cyan-800">
             <div id="modal ">
-              <button className="rounded-xl ml-10 p-2 border-4 border-yellow-500 display fixed hover:bg-yellow-500"/>
-              <button className=" ml-20 p-2 rounded-xl border-4 border-red-500 display fixed hover:bg-red-500"/>
-              <button className=" ml-30 p-2 rounded-xl border-4 border-green-500 display fixed hover:bg-green-500"/>
-              <h2 className="text-right mr-4 text-2xl">Nova tarefa</h2>
+              <div id="cores" className="flex justify-between">
+                <div>
+                  <input type="radio" className="bt-red"    onClick={() => setStatus("red")}/>
+                  <input type="radio" className="bt-yellow" onClick={() => setStatus("yellow")}/>
+                  <input type="radio" className="bt-green"  onClick={() => setStatus("green")}/>
+                </div>
+                
+                <h2 className="text-right mr-4 text-xl">New Task</h2>
+              </div>
+              {/* <input type="radio" className="rounded-xl ml-10 p-2 border-4 border-yellow-500 display fixed hover:bg-yellow-500"onClick={() => ''}></input>
+              <input type="radio" className=" ml-20 p-2 rounded-xl border-4 border-red-500 display fixed hover:bg-red-500"onClick={() => ''}/>
+              <input type="radio" className=" ml-30 p-2 rounded-xl border-4 border-green-500 display fixed hover:bg-green-500"onClick={() => ''}/> */}
+              
               <input
                 className="m-4 px-1 py-1 w-11/12 border-2 border-blue-500"
                 type="text"
@@ -159,13 +169,13 @@ function Header() {
                 className="px-5 py-1  bg-sky-500 rounded-xl hover:bg-sky-700"
                 onClick={() => setOpenTaskForm(false)}
               >
-                Criar
+                Create
               </button>
               <button
                 className="px-5 py-1 bg-red-500 rounded-xl hover:bg-red-700"
                 onClick={() => setOpenTaskForm(false)}
               >
-                Cancelar
+                Cancel
               </button>
               </div>
             </div>
