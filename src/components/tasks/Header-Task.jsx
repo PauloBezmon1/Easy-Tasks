@@ -134,7 +134,7 @@ function Header() {
           <div className="fixed top-0 left-0 w-screen h-screen bg-black opacity-75">
             dsadsadassa
           </div>
-          <div className="rounded-xl fixed w-2/5 h-3/5 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded shadow-lg border-4 border-cyan-800">
+          <div className="fixed w-4/5 lg:w-2/4 h-3.5/5 top-96 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded shadow-lg border-4 border-cyan-800">
             <div id="modal ">
               <button className="rounded-xl ml-10 p-2 border-4 border-yellow-500 display fixed hover:bg-yellow-500"/>
               <button className=" ml-20 p-2 rounded-xl border-4 border-red-500 display fixed hover:bg-red-500"/>
@@ -154,18 +154,20 @@ function Header() {
                 onChange={handleChange2}
               />
               <br />
+              <div className="flex justify-end gap-5">
               <button
-                className="px-5 py-1 ml-80 bg-sky-500 rounded-xl hover:bg-sky-700"
+                className="px-5 py-1  bg-sky-500 rounded-xl hover:bg-sky-700"
                 onClick={() => setOpenTaskForm(false)}
               >
                 Criar
               </button>
               <button
-                className="px-5 py-1 ml-10 bg-red-500 rounded-xl hover:bg-red-700"
+                className="px-5 py-1 bg-red-500 rounded-xl hover:bg-red-700"
                 onClick={() => setOpenTaskForm(false)}
               >
                 Cancelar
               </button>
+              </div>
             </div>
           </div>
         </>
