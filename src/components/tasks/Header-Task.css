@@ -14,7 +14,7 @@
     background-color: #4438cae3;
 
     &:active {
-        background-color: rgb(68, 56, 202);
+        background-color: rgba(246, 246, 246, 0.949);
     }
 }
 
@@ -25,3 +25,4 @@
 .modal{
     z-index: 105;
 }
+

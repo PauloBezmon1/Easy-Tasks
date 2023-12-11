@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import "./Header-Task.css";
 
 function Header() {
+
+
   const [openTaskForm, setOpenTaskForm] = useState(false);
 
   const [titulo, setTitulo] = useState("Title");
@@ -25,6 +27,9 @@ function Header() {
 
   return (
     <>
+    <div id="loading">
+       <img src="" alt="" ></img>
+    </div>
       <header className="sticky top-0 z-50 flex flex-wrap w-full text-sm md:justify-start md:flex-nowrap ">
         <nav className="mt-6 relative max-w-[85rem] w-full bg-white border border-gray-200 rounded-md mx-2 py-1.5 px-1  md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto h-full dark:bg-slate-900">
           <Fade cascade damping={1e-1} direction="down" triggerOnce={true}>
