@@ -6,9 +6,10 @@ const useAxios = (url) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("token");
   const headers = {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzI1OGMxNmEyNTcxNjViZjQ4NjViNiIsImlhdCI6MTcwMTk5MjY2NiwiZXhwIjoxNzAyMDc5MDY2fQ.OOoey8gUcGpQrPHC8BxrYd-MC0oOtu5qCjcz7wxW3QY'
-        };
+    'Authorization': `Bearer ${token}`
+  };
 
   useEffect(() => {
     const fetchData = async () => {

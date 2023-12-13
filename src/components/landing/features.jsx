@@ -2,6 +2,7 @@ import { Fade } from "react-awesome-reveal";
 import team from "../../assets/team.svg";
 import eye from "../../assets/eye.svg";
 import grid from "../../assets/grid.svg";
+import DeleteImage from "../../assets/Delete.png"
 
 // Componente reutilizável
 const FeatureCard = ({ icon, title, description }) => {
@@ -72,7 +73,7 @@ function Features() {
 
           {/* Animação para a imagem da direita */}
           <Fade cascade damping={1e-1} direction="right">
-            <div className="w-full object-cover h-96 sm:h-[400px] bg-[url('https://www.icolorpalette.com/download/solidcolorimage/000000_solid_color_background_icolorpalette.png')] bg-no-repeat bg-center bg-cover rounded-xl"></div>
+            <img src={DeleteImage} alt="Delete" className="w-full object-contain h-96 sm:h-[400px] bg-[url('https://www.icolorpalette.com/download/solidcolorimage/000000_solid_color_background_icolorpalette.png')] bg-no-repeat bg-center bg-cover rounded-xl"/>
           </Fade>
         </div>
       </div>

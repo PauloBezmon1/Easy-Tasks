@@ -1,35 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
-import "./Header-Task.css";
+import { useNavigate } from "react-router-dom";
+import { useCreateTask } from "../../API/tasks";
+import { toast } from "react-toastify";
+import './Header-Task.css'
 
 function Header() {
-
-
   const [openTaskForm, setOpenTaskForm] = useState(false);
+  const navigate = useNavigate()  
 
   const [titulo, setTitulo] = useState("Title");
   const handleChange = (event) => {
     setTitulo(event.target.value);
   };
 
+  const {data, error, loading, createTask} = useCreateTask()
+
   const [description, setDescription] = useState("Task description");
   const handleChange2 = (event2) => {
     setDescription(event2.target.value);
   };
 
-  const data = new Date();
-  const dia = String(data.getDate()).padStart(2, "0");
-  const mes = String(data.getMonth() + 1).padStart(2, "0");
-  const ano = data.getFullYear();
+  const date = new Date();
+  const dia = String(date.getDate()).padStart(2, "0");
+  const mes = String(date.getMonth() + 1).padStart(2, "0");
+  const ano = date.getFullYear();
   const dataCreate = `${dia}/${mes}/${ano}`;
-  console.log(dataCreate);
+
+  const handleSubmit = () => {
+    createTask(titulo, description);
+  }
+
+  useEffect(() => {
+    if (data){
+      if (data.message === "News succesfully created"){
+        toast.success("Task succesfuly created!")
+        setTimeout(() => {
+          window.location.reload()
+          navigate('/tasks')
+        }, 2500)
+        console.log(data, error)
+      } else {
+        toast.error("Error creating the task.")
+        navigate('/tasks')
+      }
+    }
+  }, [data])
+
+  const logout = () => localStorage.removeItem("token");  
+
+  const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if (!token) {
+      navigate("/login")
+    }
+  }, [])
 
   return (
     <>
-    <div id="loading">
-       <img src="" alt="" ></img>
-    </div>
       <header className="sticky top-0 z-50 flex flex-wrap w-full text-sm md:justify-start md:flex-nowrap ">
         <nav className="mt-6 relative max-w-[85rem] w-full bg-white border border-gray-200 rounded-md mx-2 py-1.5 px-1  md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto h-full dark:bg-slate-900">
           <Fade cascade damping={1e-1} direction="down" triggerOnce={true}>
@@ -121,17 +152,17 @@ function Header() {
             </div>
 
             <div className="hidden overflow-hidden transition-all duration-300 hs-collapse basis-full grow md:block">
-              <div className="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:ps-7">
+              <div className="gap-2 flex-wrap flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:ps-7">
                 <button
-                  className="px-5 py-1 bg-indigo-700 flex item-center justify-center rounded-xl text-white active-button "
+                  className=" px-5 py-1 bg-indigo-700 flex item-center justify-center rounded-xl text-white active-button "
                   onClick={() => setOpenTaskForm(true)}
                 >
                   Add task +
                 </button>
-                <Link to="/login">
+                <Link to="/login" onClick={logout}>
                   <a
                     className="flex items-center font-medium gap-x-2 md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-white"
-                    href="#"
+                    href="/"
                   >
                     Logout
                   </a>
@@ -144,39 +175,42 @@ function Header() {
 
       {openTaskForm && (
         <>
-          <div className="fixed top-0 left-0 w-screen h-screen bg-black opacity-75"></div>
-          {/* Fundo escuro */}
-          <div className="fixed w-4/5 lg:w-2/4 h-3.5/5 top-96 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded shadow-lg border-4 border-sky-500">
+          <div className="fixed top-0 left-0 w-screen h-screen bg-black opacity-75 z-40"></div>{/* Fundo escuro */}
+          <div className="fixed w-4/5 lg:w-2/4 h-3.5/5 top-96 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-slate-900 p-4 rounded-3xl shadow-lg border-4 border-indigo-700 z-50">
             <div id="modal ">
-              <h2 className="text-right mr-4 text-xl font-sans">New Task</h2>
+              <div id="cores" className="flex justify-between">
+
+                <h2 className="text-center mr-4 text-xl font-medium dark:text-white">New Task</h2>
+              </div>
               <input
-                className="m-4 px-1 py-1 w-11/12 border-2 border-blue-500"
+                className="dark:text-white m-4 px-1 py-1 w-11/12 border-2 rounded-xl dark:bg-slate-800 border-indigo-700"
                 type="text"
-                placeholder={titulo}
+                placeholder="Title"
                 onChange={handleChange}
               />
+              <br />
               <textarea
-                className="m-4 px-1 py-1 w-11/12 h-60 resize-none border-2 border-blue-500"
+                className="dark:text-white m-4 px-1 py-1 w-11/12 h-60 resize-none rounded-xl dark:bg-slate-800 border-2 border-indigo-700"
                 type="text"
-                placeholder={description}
+                placeholder="Task Description"
                 onChange={handleChange2}
               />
-
+              <br />
               <div className="flex justify-between gap-5">
-                <h3>Criação: {dataCreate}</h3>
-                <div className="flex gap-2">
-                  <button
-                    className="px-5 py-1  bg-sky-500 rounded-xl hover:bg-sky-700"
-                    onClick={() => setOpenTaskForm(false)}
-                  >
-                    Create
-                  </button>
-                  <button
-                    className="px-5 py-1 bg-red-500 rounded-xl hover:bg-red-700"
-                    onClick={() => setOpenTaskForm(false)}
-                  >
-                    Cancel
-                  </button>
+                <h3 className="dark:text-white">Criação:{dataCreate}</h3>
+                <div className="flex gap-5 flex-wrap">
+                <button
+                  className="px-5 text-white py-1  bg-indigo-700 rounded-xl hover:bg-indigo-900"
+                  onClick={() => handleSubmit()}
+                >
+                  Create
+                </button>
+                <button
+                  className="px-5 py-1 text-white bg-red-700 rounded-xl hover:bg-red-900"
+                  onClick={() => setOpenTaskForm(false)}
+                >
+                  Cancel
+                </button>
                 </div>
               </div>
             </div>

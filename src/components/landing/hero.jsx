@@ -1,5 +1,6 @@
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
+import Overview from "../../assets/Overview.png"
 
 function Hero() {
     return(
@@ -22,7 +23,7 @@ function Hero() {
               </div>
 
               <div className="mt-10 relative max-w-5xl mx-auto">
-                <div className="w-full object-cover h-96 sm:h-[480px] bg-[url('https://www.icolorpalette.com/download/solidcolorimage/000000_solid_color_background_icolorpalette.png')] bg-no-repeat bg-center bg-cover rounded-xl"></div>
+                <img src={Overview} alt="Overview" className="object-contain w-full h-96 sm:h-[480px] bg-no-repeat bg-center bg-cover rounded-3xl" />
 
                 <div className="absolute bottom-24 -start-24 blur-3xl -z-[1] w-64 h-64 bg-gradient-to-b from-purple-500 to-indigo-700 p-px rounded-full">
                   <div className="w-64 h-64 rounded-full "></div>
