@@ -14,7 +14,7 @@ export const useDeleteTask = () => {
         
         try {
             setLoading(true);
-            const response = await axios.delete(`http://localhost:3000/EasyTask/task/${id}`, { headers });
+            const response = await axios.delete(`https://gentle-umbrella-ant.cyclic.app/EasyTask/task/${id}`, { headers });
             setData(response.data);
             setError(null);
         } catch (error) {
@@ -46,7 +46,7 @@ export const useCreateTask = () => {
 
         try {
             setLoading(true);
-            const response = await axios.post(`http://localhost:3000/EasyTask/task`, body, { headers });
+            const response = await axios.post(`https://gentle-umbrella-ant.cyclic.app/EasyTask/task`, body, { headers });
             setData(response.data);
             setError(null);
         } catch (error) {
@@ -79,7 +79,7 @@ export const useUpdateTask = () => {
 
         try {
             setLoading(true);
-            const response = await axios.put(`http://localhost:3000/EasyTask/task/${id}`, body, { headers });
+            const response = await axios.put(`https://gentle-umbrella-ant.cyclic.app/EasyTask/task/${id}`, body, { headers });
             setData(response.data);
             setError(null);
         } catch (error) {

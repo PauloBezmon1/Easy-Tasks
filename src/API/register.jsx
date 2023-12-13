@@ -17,7 +17,7 @@ const useRegister = () => {
 
         try {
             setLoading(true);
-            const response = await axios.post(`http://localhost:3000/EasyTask/${url}`, body);
+            const response = await axios.post(`https://gentle-umbrella-ant.cyclic.app/EasyTask/${url}`, body);
             setData(response.data);
             setError(null);
         } catch (error) {

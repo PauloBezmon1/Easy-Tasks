@@ -15,7 +15,7 @@ const useAxios = (url) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:3000/EasyTask/${url}`, { headers });
+        const response = await axios.get(`https://gentle-umbrella-ant.cyclic.app/EasyTask/${url}`, { headers });
         setData(response.data);
         setError(null);
       } catch (error) {
